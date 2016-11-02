@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { routing } from './app-routing.module';
+import { routing } from './app.routes';
 
 @Component({
   selector: 'app',
