@@ -9,6 +9,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var complex_inputs_component_1 = require('./complex-inputs/complex-inputs.component');
+var home_component_1 = require('./home/home.component');
 var vertical_alignment_component_1 = require('./vertical-alignment/vertical-alignment.component');
 var app_routes_1 = require('./app.routes');
 var AppModule = (function () {
@@ -23,6 +24,7 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 complex_inputs_component_1.ComplexInputsComponent,
+                home_component_1.HomeComponent,
                 vertical_alignment_component_1.VerticalAlignmentComponent,
             ],
             bootstrap: [app_component_1.AppComponent]
