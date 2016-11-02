@@ -1,0 +1,109 @@
+.checkbox {
+  margin-left: 1rem;
+  position: relative;
+
+  &-input {
+    left: -9999em;
+    position: absolute;
+  }
+
+  &-label {
+    padding-left: 2rem; 
+  }
+
+  &-input ~ &-label {
+    &:before {
+      border: 1px solid $link-color;
+      border-radius: 1px;
+      content: '';
+      height: 1rem;
+      left: 0;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      width: 1rem;
+    }
+  }
+
+  &-input:not(:checked) ~ &-label {
+    &:after {
+      opacity: 0;
+    }
+  }
+
+  &-input:checked ~ &-label {
+    &:after {
+      content: "\2713";
+      color: $link-color;
+      font-size: 1rem;
+      left: 2px;
+      opacity: 1;
+      position: absolute;
+    }
+  }
+}
+
+.radio {
+  margin-left: 1rem;
+  position: relative;
+
+  &-input {
+    left: -9999em;
+    position: absolute;
+  }
+
+  &-label {
+    padding-left: 2rem;
+  }
+
+  &-input ~ &-label {
+    &:before {
+      border: 1px solid $link-color;
+      border-radius: 50%;
+      content: '';
+      height: 1rem;
+      left: 0;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      width: 1rem;
+    }
+  }
+
+  &-input:not(:checked) ~ &-label {
+    &:after {
+      opacity: 0;
+    }
+  }
+
+  &-input:checked ~ &-label {
+    &:after {
+      background-color: $link-color;
+      border-radius: 50%;
+      content: '';
+      height: 0.5rem;
+      left: 0.25rem;
+      opacity: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.5rem;
+    }
+  }
+}
+
+.select {
+  background: white;
+  border: 1px solid $link-color;
+  border-radius: 1px;
+  height: 2rem;
+  width: 240px;
+
+  > select {
+    background: transparent;
+    border: 0;
+    font-size: $base-font-size;
+    padding: 0.5rem;
+    width: 260px;
+  }
+}
