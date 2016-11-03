@@ -41,6 +41,12 @@ div {
   line-height: $base-line-height;
 }
 
+p,
+blockquote,
+section {
+  max-width: 960px;
+}
+
 a {
   color: $link-color;
   transition: color 0.5s ease-in-out;

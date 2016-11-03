@@ -7,6 +7,8 @@ var autoprefix = require('gulp-autoprefixer');
 var scssSrcPath = './sass/**/*.scss';
 var cssDestPath = './css';
 
+gulp.task('default', ['sass']);
+
 gulp.task('sass:watch', function () {
   gulp.watch(scssSrcPath, ['sass']);
 });

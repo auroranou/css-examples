@@ -31,6 +31,11 @@ section,
 div {
   line-height: 1.5; }
 
+p,
+blockquote,
+section {
+  max-width: 960px; }
+
 a {
   color: #357edd;
   transition: color 0.5s ease-in-out; }
@@ -69,6 +74,7 @@ pre {
 
 .example {
   border: 1px solid #ddd;
+  margin-bottom: 1.5rem;
   padding: 1rem; }
 
 .comment {
@@ -97,8 +103,8 @@ pre {
   .checkbox-input:not(:checked) ~ .checkbox-label:after {
     opacity: 0; }
   .checkbox-input:checked ~ .checkbox-label:after {
-    content: "\2713";
     color: #357edd;
+    content: "\2713";
     font-size: 1rem;
     left: 2px;
     opacity: 1;
