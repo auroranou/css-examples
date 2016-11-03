@@ -7,7 +7,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
   font-size: 16px;
   margin: 0;
-  padding: 0; }
+  padding: 1rem; }
 
 h1,
 h2,
@@ -52,12 +52,29 @@ h2 {
 section {
   padding: 1rem; }
 
+code,
+pre,
 .code {
-  background: #ddd;
   color: #333;
   display: inline-block;
   font-family: "Courier New", Courier, monospace;
   padding: 0 0.25rem; }
+
+code,
+.code {
+  background: #ddd; }
+
+pre {
+  white-space: pre-wrap; }
+
+.example {
+  border: 1px solid #ddd;
+  padding: 1rem; }
+
+.comment {
+  color: #666; }
+  .comment:before {
+    content: "// "; }
 
 .checkbox {
   margin-left: 1rem;
@@ -66,7 +83,8 @@ section {
     left: -9999em;
     position: absolute; }
   .checkbox-label {
-    padding-left: 2rem; }
+    padding-left: 2rem;
+    word-wrap: break-word; }
   .checkbox-input ~ .checkbox-label:before {
     border: 1px solid #357edd;
     border-radius: 1px;
@@ -74,8 +92,7 @@ section {
     height: 1rem;
     left: 0;
     position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
+    top: 0.25rem;
     width: 1rem; }
   .checkbox-input:not(:checked) ~ .checkbox-label:after {
     opacity: 0; }
@@ -102,8 +119,7 @@ section {
     height: 1rem;
     left: 0;
     position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
+    top: 0.25rem;
     width: 1rem; }
   .radio-input:not(:checked) ~ .radio-label:after {
     opacity: 0; }
@@ -115,8 +131,7 @@ section {
     left: 0.25rem;
     opacity: 1;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0.5rem;
     width: 0.5rem; }
 
 .select {
@@ -124,6 +139,7 @@ section {
   border: 1px solid #357edd;
   border-radius: 1px;
   height: 2rem;
+  -webkit-appearance: none;
   width: 240px; }
   .select > select {
     background: transparent;

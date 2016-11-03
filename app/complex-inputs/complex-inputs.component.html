@@ -1,23 +1,121 @@
 <h2>Styling complex input elements with CSS pseudo-elements</h2>
 
 <section>
+  <p>
+    Some inputs, like text fields and buttons, are easy to target with CSS classes and do not require much effort to style. Widgets like select and datepicker dropdowns, radio buttons, and checkboxes are more complicated, however, and usually vary by browser, which makes it difficult to change them with CSS. For this reason, many UI libraries implement their own versions of these inputs using Javascript and other workarounds.
+  </p>
+</section>
+
+<section>
   <h3>Radio buttons</h3>
-  <div class="radio">
-    <input type="radio" id="radio-1" name="radio-group" class="radio-input">
-    <label for="radio-1" class="radio-label">These radio buttons all have the same name attribute on the radio input.</label>
+  <p>
+    A common way of changing the styling of radio and checkbox inputs is by hiding the native input and attaching pseudo-elements to the label or other adjacent element. Typically, you will need one pseudo-element to represent the empty radio button, and another to represent the selected state.
+  </p>
+  <p>
+    An unstyled radio input looks like the following:
+  </p>
+
+  <div class="example">
+    <label for="radio-unstyled">
+      <input type="radio" id="radio-unstyled">
+      This radio input and label have no CSS classes applied.
+    </label>
   </div>
+
+  <p>
+    Using CSS, we hide the browser's default radio input by giving it <code>position: absolute;</code> and pushing it out of view using <code>left: -9999em;</code>. Next we attach a <code>::before</code> pseudo-element to the label associated with the input. This pseudo-element will create a circle to the left of the label.
+  </p>
+  <p>
+    To be able to show a selected state in the <code>::before</code> pseudo-element, we'll also need to add an <code>::after</code> pseudo-element to the label. When the input is checked, this pseudo-element will have <code>opacity: 1</code>. Otherwise, it's opacity will equal zero so that it's not visible. The finished product looks something like the following:
+  </p>
+
+  <div class="example">
     <div class="radio">
-    <input type="radio" id="radio-2" name="radio-group" class="radio-input">
-    <label for="radio-2" class="radio-label">This allows only one button to be selected in the group at a time.</label>
+      <input type="radio" id="radio-1" name="radio-group" class="radio-input">
+      <label for="radio-1" class="radio-label">These radio buttons all have the same name attribute on the radio input.</label>
+    </div>
+      <div class="radio">
+      <input type="radio" id="radio-2" name="radio-group" class="radio-input">
+      <label for="radio-2" class="radio-label">This allows only one button to be selected in the group at a time.</label>
+    </div>
+      <div class="radio">
+      <input type="radio" id="radio-3" name="radio-group" class="radio-input">
+      <label for="radio-3" class="radio-label">In general, use radio buttons if only one choice can be selected; checkboxes if multiple options are possible.</label>
+    </div>
   </div>
-    <div class="radio">
-    <input type="radio" id="radio-3" name="radio-group" class="radio-input">
-    <label for="radio-3" class="radio-label">In general, use radio buttons if only one choice can be selected; checkboxes if multiple options are possible.</label>
+
+  <p>
+    This is the code for one of the radio buttons above (note the usage of "~", which is the sibling selector in CSS):
+  </p>
+  <div class="example">
+    <pre>
+      <span class="comment">HTML
+      // Wrap the input and label within a parent div in order to position them absolutely</span>
+      &lt;div class="radio"&gt;
+        &lt;input type="radio" id="radio-1" name="radio-1" class="radio-input"&gt;
+        &lt;label for="radio-1" class="radio-label"&gt;
+          Label text for this input goes here
+        &lt;/label&gt;
+      &lt;/div&gt;
+
+      <span class="comment">CSS</span>
+      .radio {{ '{' }}
+        position: relative;
+      {{ '}' }}
+
+      .radio-input {{ '{' }}
+        <span class="comment">Pull the native radio button off screen</span>
+        left: -9999em;
+        position: absolute;
+      {{ '}' }}
+
+      .radio-label {{ '{' }}
+        <span class="comment">Add a little space between the radio button and label</span>
+        padding-left: 2rem;
+      {{ '}' }}
+
+      <span class="comment">This selector creates the radio button outline. Read the selector as: add a "before" pseudo-element to elements with the class "radio-label" that follow elements with the class "radio-input".</span>
+      .radio-input ~ .radio-label::before {{ '{' }}
+        border: 1px solid gray;
+        border-radius: 50%;
+        <span class="comment">You must specify the content attribute for pseudo-elements even if it's an empty string</span>
+        content: '';
+        height: 1rem;
+        left: 0;
+        position: absolute;
+        top: 0.25rem;
+        width: 1rem;
+      {{ '}' }}
+
+      <span class="comment">This selector creates the blue dot that is visible when the radio button is selected. Note that it looks for elements with the class "radio-input" that are also checked.</span>
+      .radio-input:checked ~ .radio-label::after {{ '{' }}
+        background-color: blue;
+        border-radius: 50%;
+        content: '';
+        height: 0.5rem;
+        left: 0.25rem;
+        <span class="comment">Since the input is checked, opacity is 1</span>
+        opacity: 1;
+        position: absolute;
+        top: 0.5rem;
+        width: 0.5rem
+      {{ '}' }}
+
+      <span class="comment">When the input is not checked, give it zero opacity so that it is invisible.</span>
+      .radio-input:not(:checked) ~ .radio-label::after {{ '{' }}
+        opacity: 0;
+      {{ '}' }}
+    </pre>
   </div>
 </section>
 
 <section>
-  <h3>Check boxes</h3>
+  <h3>Checkboxes</h3>
+  <label for="checkbox-unstyled">
+    <input type="checkbox" id="checkbox-unstyled">
+    This label and checkbox are unstyled.
+  </label>
+
   <div class="checkbox">
     <input type="checkbox" id="checkbox-1" class="checkbox-input">
     <label for="checkbox-1" class="checkbox-label">Multiple checkboxes can be selected at a time.</label>
@@ -37,4 +135,13 @@
       <option>And a third option</option>
     </select>
   </div>
+</section>
+
+<section>
+  <h3>Resources</h3>
+  <ul>
+    <li>
+      Read more about pseudo-elements in Mozilla's <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">guide</a>
+    </li>
+  </ul>
 </section>
