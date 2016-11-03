@@ -45,7 +45,7 @@
   </div>
 
   <p>
-    This is the code for one of the radio buttons above (note the usage of "~", which is the sibling selector in CSS):
+    This is the code for one of the radio buttons above (note the usage of "~", which is the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_selectors">sibling selector</a> in CSS):
   </p>
   <div class="example">
     <pre>
@@ -111,18 +111,85 @@
 
 <section>
   <h3>Checkboxes</h3>
-  <label for="checkbox-unstyled">
-    <input type="checkbox" id="checkbox-unstyled">
-    This label and checkbox are unstyled.
-  </label>
-
-  <div class="checkbox">
-    <input type="checkbox" id="checkbox-1" class="checkbox-input">
-    <label for="checkbox-1" class="checkbox-label">Multiple checkboxes can be selected at a time.</label>
+  <p>
+    Pseudo-elements can be used to build a checkbox, just as they were for a radio button above. As a reminder, this is an unstyled checkbox:
+  </p>
+  <div class="example">
+    <label for="checkbox-unstyled">
+      <input type="checkbox" id="checkbox-unstyled">
+      This label and checkbox have no additional CSS.
+    </label>
   </div>
-  <div class="checkbox">
-    <input type="checkbox" id="checkbox-2" class="checkbox-input">
-    <label for="checkbox-2" class="checkbox-label">The check mark here is created using a unicode character.</label>
+
+  <p>
+    By contrast, the examples below hide the native checkbox and implement a custom one using two pseudo-elements -- one for the square container and one for the check mark itself.
+  </p>
+  <div class="example">
+    <div class="checkbox">
+      <input type="checkbox" id="checkbox-1" class="checkbox-input">
+      <label for="checkbox-1" class="checkbox-label">Multiple checkboxes can be selected at a time.</label>
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" id="checkbox-2" class="checkbox-input">
+      <label for="checkbox-2" class="checkbox-label">The check mark here is created using a unicode character.</label>
+    </div>
+  </div>
+
+  <p>Here's the code:</p>
+  <div class="example">
+    <pre>
+      <span class="comment">HTML
+      // Wrap the input and label within a parent div in order to position them absolutely</span>
+      &lt;div class="checkbox"&gt;
+        &lt;input type="checkbox" id="checkbox-1" name="checkbox-1" class="checkbox-input"&gt;
+        &lt;label for="checkbox-1" class="checkbox-label"&gt;
+          Label text for this input goes here
+        &lt;/label&gt;
+      &lt;/div&gt;
+
+      <span class="comment">CSS</span>
+      .checkbox {{ '{' }}
+        position: relative;
+      {{ '}' }}
+
+      .checkbox-input {{ '{' }}
+        <span class="comment">Hide the original checkbox outside of the viewport</span>
+        left: -9999em;
+        position: absolute;
+      {{ '}' }}
+
+      .checkbox-label {{ '{' }}
+        padding-left: 2rem;
+      {{ '}' }}
+
+      <span class="comment">Create a new checkbox square outline using a pseudo-element attached to the label.</span>
+      .checkbox-input ~ .checkbox-label::before {{ '{' }}
+        border: 1px solid blue;
+        border-radius: 1px;
+        content: '';
+        height: 1rem;
+        left: 0;
+        position: absolute;
+        top: 0.25rem;
+        width: 1rem;
+      {{ '}' }}
+
+      <span class="comment">Add a checkmark when the checkbox is checked.</span>
+      .checkbox-input:checked ~ .checkbox-label::after {{ '{' }}
+        <span class="comment">The content here is the unicode character for a check mark</span>
+        color: blue;
+        content: '\2713';
+        font-size: 1rem;
+        left: 2px;
+        opacity: 1;
+        position: absolute;
+      {{ '}' }}
+
+      <span class="comment">When the input is not checked, hide it.</span>
+      .checkbox-input:not(:checked) ~ .checkbox-label::after {{ '{' }}
+        opacity: 0;
+      {{ '}' }}
+    </pre>
   </div>
 </section>
 
