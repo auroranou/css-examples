@@ -153,3 +153,54 @@ pre {
     font-size: 16px;
     padding: 0.5rem;
     width: 260px; }
+
+.container {
+  background-image: url("http://placekitten.com/g/500/500");
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%; }
+  .container .text {
+    color: pink;
+    font-weight: bold; }
+
+.vertical-line-height {
+  height: 400px;
+  width: 400px; }
+  .vertical-line-height .text {
+    line-height: 400px;
+    text-align: center; }
+
+.vertical-table {
+  display: table;
+  height: 400px;
+  width: 400px; }
+  .vertical-table .text {
+    display: table-cell;
+    font-size: 2rem;
+    text-align: center;
+    vertical-align: middle; }
+
+.vertical-transform {
+  height: 400px;
+  position: relative;
+  width: 400px; }
+  .vertical-transform .text {
+    font-size: 2rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%); }
+
+.vertical-pseudo-element {
+  height: 400px;
+  position: relative;
+  width: 400px; }
+  .vertical-pseudo-element:after {
+    color: pink;
+    content: 'Lorem ipsum dolor sic amet';
+    font-size: 2rem;
+    font-weight: bold;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%); }
